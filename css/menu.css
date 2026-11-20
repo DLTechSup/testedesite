@@ -1,0 +1,58 @@
+/* Cardápio em evidência na página inicial e na de reservas.
+   A página do cardápio em si (cardapio.html) usa css/cardapio.css. */
+.mcta{--mp:clamp(18px,2.6vw,30px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(16px,2.2vw,26px) clamp(18px,3vw,36px);align-items:center;margin-top:clamp(24px,3vw,40px);padding:var(--mp);border-radius:var(--r);background:var(--sand)}
+.mcta__t{display:grid;gap:8px;justify-items:start}
+.mcta__t h3{font-size:min(var(--s-h2),8.6vw);font-weight:600;line-height:1.08}
+.mcta__t p{text-wrap:balance}
+.mcta__t b{font-family:var(--font-d);font-weight:600;color:var(--btn)}
+.mcta__act{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end}
+/* partes do cardápio: cada uma abre o cardápio direto nela.
+   Computador: as 11 em uma linha. Tablet: 6 por linha. Celular: uma fileira que rola de lado. */
+.partes{grid-column:1/-1;display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:10px}
+.parte{display:grid;justify-items:center;align-content:start;gap:8px;min-width:0;padding:14px 3px 12px;border-radius:18px;background:var(--cream);color:var(--ink);text-align:center;text-decoration:none;font-family:var(--font-d);font-weight:500;font-size:.875rem;line-height:1.15;transition:transform .35s var(--ease),background-color .25s,box-shadow .35s var(--ease)}
+.parte img{height:46px;width:auto;max-width:86%;object-fit:contain}
+.parte:hover{transform:translateY(-4px);background:var(--paper);box-shadow:0 12px 24px rgba(23,67,75,.16)}
+.parte:active{transform:translateY(-1px)}
+@media (prefers-reduced-motion:no-preference){
+  .js .mcta:not(.in) .parte{opacity:0}
+  .js .mcta.in .parte{animation:parte-in .6s var(--ease) backwards;animation-delay:calc(var(--i,0)*40ms + 160ms)}
+}
+@keyframes parte-in{from{opacity:0;transform:translate3d(0,14px,0)}}
+@property --fe{syntax:'<length>';inherits:false;initial-value:0px}
+@property --fd{syntax:'<length>';inherits:false;initial-value:44px}
+.hmenu{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;width:100%;max-width:620px;padding:12px 14px 12px 12px;border-radius:calc(var(--r) + 4px);background:var(--teal);color:var(--cream);text-decoration:none;transition:transform .4s var(--ease),box-shadow .4s var(--ease),background-color .25s}
+.hmenu:hover{transform:translateY(-3px);background:var(--deep);box-shadow:0 14px 28px rgba(23,67,75,.28)}
+.hmenu b{display:block;font-family:var(--font-d);font-weight:600;font-size:var(--s-lead);line-height:1.15}
+.hmenu small{display:block;font-size:var(--s-sm);color:#d3e5e8;line-height:1.35}
+.hmenu__ic{width:52px;height:52px;border-radius:14px;background:var(--sand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317434B' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 3h9l4 4v14H6z'/%3E%3Cpath d='M9 10h7M9 14h7M9 18h4'/%3E%3C/svg%3E") center/28px no-repeat}
+.hmenu__go{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--btn);color:#fff;font-family:var(--font-d);font-weight:500;font-size:var(--s-sm);white-space:nowrap;transition:transform .4s var(--ease)}
+.hmenu:hover .hmenu__go{transform:scale(1.06)}
+.hmenu--row{margin-top:6px}
+.nav__links a.nav__menu{color:var(--cream)}
+.nav__links a{white-space:nowrap}
+@media (max-width:84rem){.nav .status{display:none}}
+@media (max-width:62rem){.nav__links a.nav__menu{display:none}}
+@media (max-width:72rem){
+  .partes{display:flex;flex-wrap:wrap;justify-content:center}
+  .parte{flex:0 0 calc((100% - 50px)/6 - .1px)}
+}
+@media (max-width:60rem){
+  .mcta{grid-template-columns:1fr}
+  .mcta__act{order:3;justify-content:flex-start}
+}
+@media (max-width:40rem){
+  .mcta__act{justify-content:stretch}
+  .mcta__act .btn{flex:1 1 auto;justify-content:center}
+  .partes{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding-inline:var(--mp);scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    margin-inline:calc(-1*var(--mp));padding:4px var(--mp) 6px;transition:--fe .25s,--fd .25s;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 var(--fe,0px),#000 calc(100% - var(--fd,44px)),transparent);mask-image:linear-gradient(90deg,transparent,#000 var(--fe,0px),#000 calc(100% - var(--fd,44px)),transparent)}
+  .partes::-webkit-scrollbar{display:none}
+  /* --n = quantas partes cabem inteiras; a seguinte aparece pela metade, para mostrar que a fileira continua */
+  .partes{--n:5}
+  .parte{flex:0 0 calc((100% + var(--mp) - var(--n)*10px)/(var(--n) + .6));scroll-snap-align:start}
+  .hmenu{grid-template-columns:auto 1fr}
+  .hmenu__go{grid-column:1/-1;justify-content:center}
+}
+@media (max-width:599px){.partes{--n:4}}
+@media (max-width:479px){.partes{--n:3}}
+@media (max-width:371px){.partes{--n:2}}

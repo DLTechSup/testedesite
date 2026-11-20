@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Configurações | Cumbuco Beach</title>
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a class="nav__logo" href="index.html" aria-label="Ver o site"><span class="badge"><img src="img/logo.png" alt="" width="420" height="325"></span></a>
+    <nav class="nav__links" aria-label="Atalhos" style="display:flex">
+      <a class="btn btn--sm btn--line" href="index.html">Ver o site</a>
+      <a class="btn btn--sm btn--teal" href="reservar.html">Ver reservas</a>
+    </nav>
+  </div>
+</header>
+
+<main class="adm">
+  <div class="wrap">
+    <div class="adm__top">
+      <div><h1>Configurações do site</h1><p class="small" id="saved" role="status">Tudo o que você mudar aqui é salvo sozinho.</p></div>
+    </div>
+    <p class="note">Por enquanto as alterações ficam salvas <b>neste aparelho</b>. Quando o banco de dados (Supabase) for ligado, elas passam a valer para todos os visitantes. Até lá, use "Exportar" na aba Cópia para guardar ou enviar as configurações.</p>
+
+    <div class="adm__tabs" role="tablist" aria-label="Seções" style="margin-top:22px">
+      <button class="tab" role="tab" type="button" data-t="geral" aria-selected="true">Geral</button>
+      <button class="tab" role="tab" type="button" data-t="topo" aria-selected="false">Topo da página</button>
+      <button class="tab" role="tab" type="button" data-t="areas" aria-selected="false">Áreas de reserva</button>
+      <button class="tab" role="tab" type="button" data-t="cardapio" aria-selected="false">Cozinha e drinks</button>
+      <button class="tab" role="tab" type="button" data-t="fotos" aria-selected="false">Fotos e Instagram</button>
+      <button class="tab" role="tab" type="button" data-t="agenda" aria-selected="false">Aviso e agenda</button>
+      <button class="tab" role="tab" type="button" data-t="disp" aria-selected="false">Espaços ocupados</button>
+      <button class="tab" role="tab" type="button" data-t="copia" aria-selected="false">Cópia</button>
+    </div>
+
+    <section class="adm__panel" data-p="geral">
+      <div class="box">
+        <h2>Nome da barraca</h2>
+        <div class="field"><label for="a-nome">Aparece no título, em "Monte o seu dia" e na mensagem de reserva</label><input id="a-nome" type="text" maxlength="40" placeholder="Digite o nome da barraca"></div>
+      </div>
+      <div class="box">
+        <h2>Faixa de palavras que passa</h2>
+        <div class="field"><label for="a-faixa">Uma palavra ou expressão por linha</label><textarea id="a-faixa" rows="8" placeholder="Digite uma palavra por linha"></textarea></div>
+      </div>
+    </section>
+
+    <section class="adm__panel" data-p="topo" hidden>
+      <div class="box">
+        <h2>As três fotos do início</h2>
+        <p class="small">A primeira é a foto grande. As duas seguintes ficam embaixo. Use a seta para mudar a ordem.</p>
+        <div id="pe-hero"></div>
+      </div>
+    </section>
+
+    <section class="adm__panel" data-p="areas" hidden id="p-areas"></section>
+
+    <section class="adm__panel" data-p="cardapio" hidden>
+      <div class="box"><h2>Cozinha</h2><p class="small">Só o nome já basta. Se quiser mostrar o que vai no prato, escreva um ingrediente por linha (ou separados por vírgula): eles aparecem em destaque quando o cliente toca na foto.</p><div id="it-coz" style="display:grid;gap:12px"></div><div><button class="btn btn--sm btn--teal" type="button" data-add="coz">Adicionar prato</button></div></div>
+      <div class="box"><h2>Drinks</h2><div id="it-dri" style="display:grid;gap:12px"></div><div><button class="btn btn--sm btn--teal" type="button" data-add="dri">Adicionar drink</button></div></div>
+    </section>
+
+    <section class="adm__panel" data-p="fotos" hidden>
+      <div class="box">
+        <h2>Fotos da faixa "Quem vem, volta"</h2>
+        <p class="small">Envie quantas fotos quiser, direto do celular ou do computador. São elas que passam na faixa de fotos da página inicial enquanto o Instagram automático não estiver ligado.</p>
+        <div id="pe-gal"></div>
+      </div>
+      <div class="box">
+        <h2>Instagram automático (opcional)</h2>
+        <p>Com ele ligado, a faixa "Quem vem, volta" passa a mostrar sozinha as 12 publicações mais recentes de @cumbucobeachbrasil, no lugar das fotos acima. Postou no Instagram, aparece no site em até 6 horas. Ligar ou não é uma escolha sua: sem ligar, o site continua com as fotos acima.</p>
+        <p class="note" id="ig-estado" role="status">Conferindo se está ligado.</p>
+        <h3>Como funciona</h3>
+        <ul class="pontos">
+          <li>A ligação é direta com o Instagram (Meta, a dona do Instagram). Não entra nenhum site de terceiros.</li>
+          <li>A conta da barraca autoriza uma vez e o Instagram entrega uma chave. Essa chave fica guardada no cofre de segredos do GitHub, onde o site está hospedado. Ela não é digitada nesta página e não fica em nenhum arquivo do site.</li>
+          <li>Um robô do próprio GitHub busca as publicações de 6 em 6 horas e guarda as fotos dentro do site. Ele também renova a chave sozinho, para ela não vencer.</li>
+        </ul>
+        <h3>Passo a passo para ligar (uma vez só)</h3>
+        <ol class="passos">
+          <li>Entre em <b>developers.facebook.com</b> com o Facebook de quem cuida da barraca. Clique em <b>My Apps</b> e depois em <b>Create App</b>.</li>
+          <li>Em caso de uso, escolha <b>Other</b>. Em tipo de app, escolha <b>Business</b>. Dê um nome sem as palavras "Instagram" ou "Facebook", informe um e-mail e clique em <b>Create App</b>.</li>
+          <li>No painel do app, em <b>Add a Product</b>, clique em <b>Set up</b> no <b>Instagram</b>. No menu da esquerda, abra <b>Instagram</b> e depois <b>API setup with Instagram login</b>.</li>
+          <li>Em <b>Generate access tokens</b>, clique em <b>Add an Instagram Account</b>, entre com a conta da barraca e clique em <b>Allow</b>.</li>
+          <li>Clique em <b>Generate token</b> ao lado da conta e copie a chave na hora: ela só aparece uma vez.</li>
+          <li>No GitHub, abra o repositório do site e vá em <b>Settings</b>, <b>Secrets and variables</b>, <b>Actions</b>, <b>New repository secret</b>. Em Name escreva <code>IG_TOKEN</code>. Em Secret cole a chave. Clique em <b>Add secret</b>.</li>
+          <li>Ainda no GitHub, abra a aba <b>Actions</b>, escolha <b>Fotos do Instagram</b> e clique em <b>Run workflow</b>. Em poucos minutos as fotos do Instagram entram na faixa. Daí em diante é automático.</li>
+        </ol>
+        <p class="small">A conta da barraca precisa ser profissional (Comercial ou Criador de conteúdo) e pública. Os nomes dos botões podem aparecer em português. Se o painel pedir para convidar a conta como testadora, faça o convite em App roles, Roles, e aceite no Instagram em Configurações, Apps e sites, Convites de testador.</p>
+        <h3>Cuidados com a chave</h3>
+        <ul class="pontos">
+          <li>A chave vale como uma senha. Cole só no cofre de segredos do GitHub. Não mande por mensagem, não guarde em arquivo e não escreva em nenhuma página do site.</li>
+          <li>O robô usa a chave só para ler as publicações e para renovar a própria chave. Ele não publica nem apaga nada.</li>
+          <li>Se a senha do Instagram mudar, a chave para de valer. As fotos que já estão no site continuam, e basta repetir os passos 5 e 6 para gerar outra.</li>
+        </ul>
+        <h3>Para desligar</h3>
+        <p>Apague o segredo <code>IG_TOKEN</code> no GitHub e rode o robô uma vez (aba Actions, Fotos do Instagram, Run workflow), ou espere a próxima rodada. A faixa volta a mostrar as fotos enviadas por você.</p>
+      </div>
+    </section>
+
+    <section class="adm__panel" data-p="agenda" hidden>
+      <div class="box">
+        <h2>Aviso do dia</h2>
+        <p class="small">Uma faixa no topo da página inicial. Use para recados rápidos, como "Hoje tem música ao vivo".</p>
+        <div class="chips" role="radiogroup" aria-label="Aviso do dia">
+          <label class="chip"><input type="radio" name="avon" value="0"><span>Desligado</span></label>
+          <label class="chip"><input type="radio" name="avon" value="1"><span>Ligado</span></label>
+        </div>
+        <div class="field"><label for="a-aviso">Texto do aviso</label><input id="a-aviso" type="text" maxlength="120" placeholder="Digite o recado"></div>
+      </div>
+      <div class="box">
+        <h2>Agenda de eventos</h2>
+        <p class="small">Cada evento aparece na página inicial com um botão para reservar naquela data. Eventos que já passaram somem sozinhos.</p>
+        <div id="it-ev" style="display:grid;gap:12px"></div>
+        <div><button class="btn btn--sm btn--teal" type="button" id="ev-add">Adicionar evento</button></div>
+      </div>
+    </section>
+
+    <section class="adm__panel" data-p="disp" hidden>
+      <div class="box">
+        <h2>Espaços ocupados</h2>
+        <p class="small">Marque um espaço como ocupado em uma data. Na página de reservas ele aparece como "ocupado" e não pode ser escolhido naquele dia.</p>
+        <div class="row">
+          <div class="field" style="min-width:180px"><label for="bl-esp">Espaço</label><select id="bl-esp"></select></div>
+          <div class="field" style="min-width:180px"><label for="bl-data">Data</label><input id="bl-data" type="date"></div>
+          <button class="btn btn--sm btn--teal" type="button" id="bl-add" style="align-self:end">Marcar como ocupado</button>
+        </div>
+        <ul id="bl-list" style="display:grid;gap:8px"></ul>
+      </div>
+    </section>
+
+    <section class="adm__panel" data-p="copia" hidden>
+      <div class="box">
+        <h2>Cópia das configurações</h2>
+        <p class="small">Exporte para guardar ou levar para outro aparelho. Importe para aplicar uma cópia.</p>
+        <div class="row">
+          <button class="btn btn--sm btn--teal" type="button" id="b-exp">Exportar</button>
+          <label class="btn btn--sm btn--line" style="position:relative;cursor:pointer">Importar<input id="b-imp" type="file" accept="application/json,.json" style="position:absolute;inset:0;opacity:0;cursor:pointer"></label>
+          <button class="btn btn--sm btn--line" type="button" id="b-reset">Voltar ao padrão</button>
+        </div>
+        <p class="small" id="b-res" role="status"></p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="js/site.js"></script>
+<script>
+(function(){
+var $=CB.$,$$=CB.$$,esc=CB.esc, cfg, timer, st=$('#saved');
+function save(){
+  clearTimeout(timer); st.textContent='Salvando…';
+  timer=setTimeout(function(){CB.save(cfg).then(function(){st.textContent='Alterações salvas neste aparelho.'}).catch(function(){st.textContent='Não foi possível salvar. Remova algumas fotos e tente de novo.'})},350);
+}
+/* fotos enviadas são reduzidas antes de guardar */
+function toData(file){return new Promise(function(res,rej){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){var k=Math.min(1,1400/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.82))};im.onerror=function(){rej(new Error('img'))};im.src=u})}
+function files(input){return Promise.all(Array.prototype.slice.call(input.files).map(toData)).then(function(a){input.value='';return a})}
+
+/* editor de lista de fotos: várias fotos, ordem e remoção */
+function photos(host,arr,o){
+  o=o||{};
+  function draw(){
+    host.innerHTML=''; var grid=document.createElement('div'); grid.className='pe';
+    if(!o.max||arr.length<o.max){
+      var up=document.createElement('div'); up.className='pe__up';
+      up.innerHTML='<label class="btn btn--sm btn--teal">Enviar fotos do aparelho<input type="file" accept="image/*" multiple aria-label="Enviar fotos do aparelho"></label><span class="small">'+(arr.length?arr.length+(arr.length>1?' fotos':' foto'):'Nenhuma foto ainda')+(o.max?' (máximo '+o.max+')':'')+'</span>';
+      up.querySelector('input').addEventListener('change',function(e){files(e.target).then(function(a){a.forEach(function(s){if(!o.max||arr.length<o.max)arr.push(s)});draw();save()})});
+      host.appendChild(up);
+    }
+    arr.forEach(function(src,i){
+      var t=document.createElement('div'); t.className='pe__t';
+      t.innerHTML='<img src="'+esc(src)+'" alt="Foto '+(i+1)+'">'+(i?'<button type="button" class="mv" aria-label="Mover a foto '+(i+1)+' para antes">‹</button>':'')+'<button type="button" class="rm" aria-label="Remover a foto '+(i+1)+'">×</button>';
+      t.querySelector('.rm').addEventListener('click',function(){arr.splice(i,1);draw();save()});
+      var mv=t.querySelector('.mv'); if(mv)mv.addEventListener('click',function(){arr.splice(i-1,0,arr.splice(i,1)[0]);draw();save()});
+      grid.appendChild(t);
+    });
+    if(!o.max||arr.length<o.max){
+      var add=document.createElement('label'); add.className='pe__add'; add.innerHTML='<span>Adicionar fotos</span><input type="file" accept="image/*" multiple aria-label="Adicionar fotos">';
+      add.querySelector('input').addEventListener('change',function(e){files(e.target).then(function(a){a.forEach(function(s){if(!o.max||arr.length<o.max)arr.push(s)});draw();save()})});
+      grid.appendChild(add);
+    }
+    host.appendChild(grid);
+    var row=document.createElement('div'); row.className='pe__link'; row.style.marginTop='10px';
+    row.innerHTML='<input type="url" placeholder="Ou cole aqui o link de uma foto" aria-label="Link de uma foto"><button type="button" class="btn btn--sm btn--line">Adicionar link</button>';
+    row.querySelector('button').addEventListener('click',function(){var v=row.querySelector('input').value.trim();if(/^https?:\/\//.test(v)&&(!o.max||arr.length<o.max)){arr.push(v);draw();save()}});
+    host.appendChild(row);
+  }
+  draw();
+}
+
+/* itens do cardápio */
+function itens(key){
+  var host=$('#it-'+key), arr=cfg.cardapio[key]; host.innerHTML='';
+  arr.forEach(function(d,i){
+    var el=document.createElement('div'); el.className='item';
+    el.innerHTML='<label class="pe__add" style="padding:0;overflow:hidden">'+(d.foto?'<img src="'+esc(d.foto)+'" alt="" style="width:100%;height:100%;object-fit:cover">':'<span>Foto</span>')+'<input type="file" accept="image/*" aria-label="Trocar a foto de '+esc(d.nome||'item')+'"></label>'
+      +'<div class="item__f"><div class="field"><label>Nome<input type="text" value="'+esc(d.nome)+'" data-k="nome" maxlength="50" placeholder="Digite o nome"></label></div><div class="field"><label>Preço (opcional)<input type="text" value="'+esc(d.preco||'')+'" data-k="preco" maxlength="20" placeholder="Ex.: R$ 89,00"></label></div><div class="field"><label>Ingredientes (opcional)<textarea data-k="comp" rows="3" placeholder="Um ingrediente por linha">'+esc(CB.comp(d.comp).join('\n'))+'</textarea></label></div></div>'
+      +'<button type="button" class="btn btn--sm btn--line" aria-label="Remover '+esc(d.nome||'item')+'">Remover</button>';
+    el.querySelector('input[type=file]').addEventListener('change',function(e){files(e.target).then(function(a){if(a[0]){d.foto=a[0];itens(key);save()}})});
+    $$('[data-k]',el).forEach(function(inp){inp.addEventListener('input',function(){d[inp.dataset.k]=inp.value;save()})});
+    el.querySelector('button').addEventListener('click',function(){arr.splice(i,1);itens(key);save()});
+    host.appendChild(el);
+  });
+}
+$$('[data-add]').forEach(function(b){b.addEventListener('click',function(){cfg.cardapio[b.dataset.add].push({nome:'',comp:'',foto:''});itens(b.dataset.add);save();var n=$$('#it-'+b.dataset.add+' input[type=text]');n[n.length-1].focus()})});
+
+/* áreas de reserva: fotos do ambiente e de cada espaço */
+function areas(){
+  var host=$('#p-areas'); host.innerHTML='';
+  cfg.tipos.forEach(function(t){
+    var box=document.createElement('div'); box.className='box';
+    box.innerHTML='<h2>'+esc(t.id)+'</h2><div class="field"><label>Título<input type="text" value="'+esc(t.titulo)+'" data-k="titulo" maxlength="60"></label></div><div class="field"><label>Descrição<textarea data-k="desc" rows="2">'+esc(t.desc)+'</textarea></label></div><h3>Fotos do ambiente</h3><p class="small">Aparecem na página inicial e na reserva quando o cliente escolhe "'+esc(t.id)+'".</p><div class="ph"></div><h3>Fotos de cada espaço</h3><p class="small">Opcional. Se um espaço não tiver fotos, o site mostra as fotos do ambiente.</p>';
+    $$('[data-k]',box).forEach(function(inp){inp.addEventListener('input',function(){t[inp.dataset.k]=inp.value;save()})});
+    photos(box.querySelector('.ph'),t.fotos);
+    for(var i=1;i<=t.qtd;i++){(function(n){
+      if(!cfg.espacos[n])cfg.espacos[n]=[];
+      var dt=document.createElement('details'); dt.className='sub'; dt.innerHTML='<summary>'+esc(n)+' ('+cfg.espacos[n].length+' fotos)</summary><div></div>';
+      photos(dt.lastChild,cfg.espacos[n]); box.appendChild(dt);
+    })(t.id+' '+i)}
+    host.appendChild(box);
+  });
+}
+
+/* agenda */
+function eventos(){
+  var host=$('#it-ev'); host.innerHTML='';
+  cfg.eventos.forEach(function(e,i){
+    var el=document.createElement('div'); el.className='item';
+    el.innerHTML='<label class="pe__add" style="padding:0;overflow:hidden">'+(e.foto?'<img src="'+esc(e.foto)+'" alt="" style="width:100%;height:100%;object-fit:cover">':'<span>Foto (opcional)</span>')+'<input type="file" accept="image/*" aria-label="Foto do evento"></label>'
+      +'<div class="item__f"><div class="field"><label>Nome do evento<input type="text" value="'+esc(e.titulo)+'" data-k="titulo" maxlength="60" placeholder="Ex.: Música ao vivo"></label></div><div class="field"><label>Data<input type="date" value="'+esc(e.data)+'" data-k="data"></label></div><div class="field"><label>Descrição (opcional)<textarea data-k="desc" rows="2" placeholder="Conte o que vai acontecer">'+esc(e.desc)+'</textarea></label></div></div>'
+      +'<button type="button" class="btn btn--sm btn--line">Remover</button>';
+    el.querySelector('input[type=file]').addEventListener('change',function(ev){files(ev.target).then(function(a){if(a[0]){e.foto=a[0];eventos();save()}})});
+    $$('[data-k]',el).forEach(function(inp){inp.addEventListener('input',function(){e[inp.dataset.k]=inp.value;save()})});
+    el.querySelector('button').addEventListener('click',function(){cfg.eventos.splice(i,1);eventos();save()});
+    host.appendChild(el);
+  });
+}
+$('#ev-add').addEventListener('click',function(){cfg.eventos.push({titulo:'',data:'',desc:'',foto:''});eventos();save()});
+/* espaços ocupados */
+function bloqueios(){
+  var sel=$('#bl-esp'); sel.innerHTML=''; cfg.tipos.forEach(function(t){for(var i=1;i<=t.qtd;i++)sel.add(new Option(t.id+' '+i,t.id+' '+i))});
+  var ul=$('#bl-list'); ul.innerHTML='';
+  cfg.bloqueios.sort(function(a,b){return a.data<b.data?-1:1}).forEach(function(b,i){
+    var li=document.createElement('li'); li.className='row note'; li.innerHTML='<b>'+esc(b.esp)+'</b> <span>ocupado em '+esc(CB.br(b.data))+'</span> <button type="button" class="link">Liberar</button>';
+    li.querySelector('button').addEventListener('click',function(){cfg.bloqueios.splice(i,1);bloqueios();save()}); ul.appendChild(li);
+  });
+  if(!cfg.bloqueios.length)ul.innerHTML='<li class="small">Nenhum espaço marcado como ocupado.</li>';
+}
+$('#bl-add').addEventListener('click',function(){
+  var e=$('#bl-esp').value, d=$('#bl-data').value; if(!e||!d)return;
+  if(!cfg.bloqueios.some(function(b){return b.esp===e&&b.data===d}))cfg.bloqueios.push({esp:e,data:d});
+  bloqueios(); save();
+});
+$$('input[name=avon]').forEach(function(r){r.addEventListener('change',function(){cfg.aviso.on=r.value==='1';save()})});
+$('#a-aviso').addEventListener('input',function(e){cfg.aviso.texto=e.target.value.trim();save()});
+
+function fill(){
+  eventos(); bloqueios(); $$('input[name=avon]').forEach(function(r){r.checked=(r.value==='1')===cfg.aviso.on}); $('#a-aviso').value=cfg.aviso.texto;
+  $('#a-nome').value=cfg.nome; $('#a-faixa').value=cfg.faixa.join('\n');
+  photos($('#pe-hero'),cfg.hero,{max:3}); areas(); itens('coz'); itens('dri'); photos($('#pe-gal'),cfg.galeria);
+}
+$('#a-nome').addEventListener('input',function(e){cfg.nome=e.target.value.trim()||'Cumbuco Beach';save()});
+$('#a-faixa').addEventListener('input',function(e){cfg.faixa=e.target.value.split('\n').map(function(x){return x.trim()}).filter(Boolean);save()});
+/* Instagram automático: confere se o robô já guardou fotos no site */
+(function(){
+  var el=$('#ig-estado'), nao='Ainda não está ligado. A faixa está mostrando as fotos enviadas por você.';
+  if(!el||!window.fetch)return;
+  fetch('insta.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('sem lista');return r.json()}).then(function(j){
+    var n=(j&&j.fotos||[]).length, d=j&&j.atualizado?new Date(j.atualizado):null, quando='';
+    if(!n){el.textContent=nao;return}
+    if(d&&!isNaN(d))quando=', atualizadas em '+d.toLocaleDateString('pt-BR')+' às '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    el.textContent='Está ligado: a faixa mostra '+n+' fotos do Instagram'+quando+'.'; el.classList.add('ok');
+  }).catch(function(){el.textContent=nao});
+})();
+
+/* abas */
+var tabs=$$('.adm__tabs .tab');
+tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(b){b.setAttribute('aria-selected',b===t)});$$('[data-p]').forEach(function(p){p.hidden=p.dataset.p!==t.dataset.t});if(t.dataset.t==='areas')areas()})});
+
+/* cópia */
+$('#b-exp').addEventListener('click',function(){
+  var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg)],{type:'application/json'})); a.download='cumbuco-beach-configuracoes.json'; document.body.appendChild(a); a.click(); a.remove();
+  $('#b-res').textContent='Arquivo de configurações gerado.';
+});
+$('#b-imp').addEventListener('change',function(e){
+  var f=e.target.files[0]; if(!f)return;
+  f.text().then(function(t){cfg=CB.merge(JSON.parse(t));fill();save();$('#b-res').textContent='Configurações importadas.'}).catch(function(){$('#b-res').textContent='Esse arquivo não é uma cópia válida.'});
+  e.target.value='';
+});
+var armed=false;
+$('#b-reset').addEventListener('click',function(e){
+  if(!armed){armed=true;e.target.textContent='Confirmar: apagar minhas alterações';return}
+  armed=false; e.target.textContent='Voltar ao padrão';
+  CB.reset().then(function(){cfg=CB.clone(CB.DEF);fill();$('#b-res').textContent='O site voltou ao conteúdo padrão.'});
+});
+
+CB.load().then(function(c){cfg=c;fill()});
+})();
+</script>
+</body>
+</html>

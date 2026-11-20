@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reservar | Cumbuco Beach</title>
+<meta name="description" content="Reserve sua mesa, tenda ou salão na Barraca Cumbuco Beach. Escolha o lugar, o dia e o horário e envie pelo WhatsApp.">
+<meta name="theme-color" content="#FBF1D4">
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a class="nav__logo" href="index.html" aria-label="Voltar ao início"><span class="badge"><img src="img/logo.png" alt="" width="420" height="325"></span></a>
+    <nav class="nav__links" aria-label="Principal">
+      <span class="status" id="status" role="status"><i></i><span>Aberto todos os dias, das 9h às 17h</span></span>
+      <a href="index.html">Início</a>
+      <a class="btn btn--sm btn--teal nav__menu" href="cardapio.html">Cardápio</a>
+      <div class="lang" id="lang" role="group" aria-label="Idioma"></div>
+      <a class="btn btn--sm btn--line" href="https://wa.me/5585981777390" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main class="rpage">
+  <div class="wrap">
+    <div class="rpage__head">
+      <a class="link back" href="index.html">Voltar ao início</a>
+      <h1>Guarde o seu lugar na <span data-nome>Cumbuco Beach</span></h1>
+      <p class="lead">Escolha o lugar, o dia e o horário. A mensagem vai pronta para o WhatsApp e a barraca confirma.</p>
+      <a class="hmenu hmenu--row" href="cardapio.html"><span class="hmenu__ic" aria-hidden="true"></span><span><b>Cardápio completo</b><small>Veja os pratos e preços, baixe ou abra no celular</small></span><span class="hmenu__go">Abrir cardápio</span></a>
+    </div>
+
+    <div class="rgrid">
+      <form class="form form--page" id="form" novalidate>
+        <div class="welcome" id="welcome" hidden></div>
+        <fieldset class="grp">
+          <legend>1. Onde você quer ficar</legend>
+          <div class="chips" role="radiogroup" aria-label="Ambiente" id="c-amb"></div>
+        </fieldset>
+        <fieldset class="grp" id="g-esp" hidden>
+          <legend>Qual espaço</legend>
+          <div class="chips" role="radiogroup" aria-label="Espaço" id="c-esp"></div>
+        </fieldset>
+        <div class="two">
+          <div class="field" id="fd-data"><label for="f-data">2. Dia</label><input id="f-data" name="data" type="date" required></div>
+          <div class="field" id="fd-pes"><label for="f-pes">Pessoas</label>
+            <select id="f-pes" name="pes" required>
+              <option value="">Quantas?</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option value="mais de 12">Mais de 12</option>
+            </select>
+          </div>
+        </div>
+        <fieldset class="grp">
+          <legend>3. Horário de chegada</legend>
+          <div class="chips" role="radiogroup" aria-label="Horário" id="c-hor"></div>
+        </fieldset>
+        <div class="field" id="fd-nome"><label for="f-nome">4. Seu nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Como você se chama?"></div>
+        <div class="two">
+          <div class="field"><label for="f-oca">Ocasião <span class="opt">(opcional)</span></label>
+            <select id="f-oca" name="oca"><option value="">Só curtir a praia</option><option value="Encontro a dois">Encontro a dois</option><option value="Almoço em família">Almoço em família</option><option value="Turma de amigos">Turma de amigos</option><option value="Aniversário">Aniversário</option><option value="Comemoração">Comemoração</option></select></div>
+          <div class="field"><label for="f-obs">Observação <span class="opt">(opcional)</span></label><input id="f-obs" name="obs" type="text" maxlength="140" placeholder="Ex.: cadeira para criança, aniversariante"></div>
+        </div>
+        <button class="btn" type="submit">Enviar reserva pelo WhatsApp</button>
+        <p class="msg" id="msg" role="status" aria-live="polite"></p>
+        <p class="small">Reservas das 9h às 14h30. Funcionamento todos os dias, das 9h às 17h. Sem cadastro e sem aplicativo.</p>
+      </form>
+
+      <aside class="rside" aria-label="Resumo da reserva">
+        <div class="rphoto" id="rphoto"></div>
+        <p class="rphoto__cap" id="rcap" aria-live="polite">Escolha um ambiente para ver as fotos.</p>
+        <div class="chat">
+          <span>Prévia da mensagem que vai para a barraca</span>
+          <div class="bubble" id="bubble" aria-live="polite" data-noi18n lang="pt-BR"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="foot dark">
+  <div class="wrap">
+    <div class="foot__in">
+      <a class="nav__logo" href="index.html" aria-label="Início"><span class="badge" style="width:64px;height:64px"><img src="img/logo.png" alt="" width="420" height="325"></span></a>
+      <nav class="foot__links" aria-label="Rodapé">
+        <a href="index.html">Início</a>
+        <a href="https://wa.me/5585981777390" target="_blank" rel="noopener">WhatsApp (85) 98177-7390</a>
+        <a href="https://www.instagram.com/cumbucobeachbrasil/" target="_blank" rel="noopener">@cumbucobeachbrasil</a>
+      </nav>
+    </div>
+    <p class="foot__legal">Barraca <span data-nome>Cumbuco Beach</span>. Av. Central, 49, Tabuba, Caucaia (CE).</p>
+  </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function(){
+var $=CB.$,$$=CB.$$,esc=CB.esc,HORAS=CB.HORAS,MIN=CB.MIN,WA=CB.WA,T=CB.T,L=CB.lugar;
+var form=$('#form'), msg=$('#msg'), bubble=$('#bubble'), cfg;
+var q=new URLSearchParams(location.search);
+var d=$('#f-data'); d.min=CB.partes().iso; d.value=CB.defIso();
+
+function chip(host,name,value,label){
+  var l=document.createElement('label'); l.className='chip';
+  l.innerHTML='<input type="radio" name="'+name+'" value="'+esc(value)+'"><span>'+esc(label)+'</span>'; host.appendChild(l); return l.firstChild;
+}
+HORAS.forEach(function(h){chip($('#c-hor'),'hor',h,h)});
+function g(n){return (form.querySelector('input[name='+n+']:checked')||{}).value||''}
+function val(){return {amb:g('amb'),esp:g('esp'),hor:g('hor'),data:form.data.value,pes:form.pes.value,nome:form.nome.value.trim(),oca:form.oca.value,obs:form.obs.value.trim()}}
+function texto(v,final){
+  var local=v.amb?(v.esp||v.amb+' (qualquer espaço)'):'…';
+  return 'Olá! Quero reservar na Barraca '+(cfg?cfg.nome:'Cumbuco Beach')+'.\n\nNome: '+(v.nome||'…')+'\nPessoas: '+(v.pes||'…')+'\nDia: '+(CB.br(v.data)||'…')+'\nHorário: '+(v.hor||'…')+'\nLugar: '+local+(v.oca?'\nOcasião: '+v.oca:'')+(v.obs?'\nObservação: '+v.obs:'')+(final?'\n\nPode confirmar?':'');
+}
+var lastTxt='';
+function render(){var t=texto(val());bubble.textContent=t;if(t!==lastTxt){bubble.classList.remove('pop');void bubble.offsetWidth;bubble.classList.add('pop');lastTxt=t}}
+var lastFoto='';
+function fotos(){
+  var v=val(), key=v.amb+'|'+v.esp; if(key===lastFoto)return; lastFoto=key;
+  if(!v.amb){$('#rphoto').innerHTML='';CB.slider($('#rphoto'),[cfg.hero[0]],'Foto da barraca');$('#rcap').textContent=T('Escolha um ambiente para ver as fotos.');return}
+  var f=CB.fotosDe(cfg,v.amb,v.esp), t=cfg.tipos.filter(function(x){return x.id===v.amb})[0];
+  CB.slider($('#rphoto'),f.length?f:[cfg.hero[0]],'Fotos de '+(v.esp||v.amb));
+  $('#rcap').textContent=(v.esp?L(v.esp):T(t.titulo))+(f.length>1?' ('+f.length+' '+T('fotos')+')':'');
+}
+function espacos(amb,sel){
+  var host=$('#c-esp'); host.innerHTML=''; var t=cfg.tipos.filter(function(x){return x.id===amb})[0];
+  $('#g-esp').hidden=!t; if(!t)return;
+  chip(host,'esp','',T('Tanto faz')).checked=!sel;
+  for(var i=1;i<=t.qtd;i++){var n=amb+' '+i, c=chip(host,'esp',n,L(n)); if(sel===n)c.checked=true}
+  travar();
+}
+/* espaços que o administrador marcou como ocupados no dia escolhido */
+function ocupado(n,data){return (cfg.bloqueios||[]).some(function(b){return b.esp===n&&b.data===data})}
+function travar(){
+  var data=form.data.value;
+  $$('input[name=esp]').forEach(function(r){
+    if(!r.value)return; var off=ocupado(r.value,data), sp=r.nextElementSibling;
+    r.disabled=off; r.parentNode.classList.toggle('off',off); sp.textContent=L(r.value)+(off?' ('+T('ocupado')+')':'');
+    if(off&&r.checked){r.checked=false;$$('input[name=esp]')[0].checked=true}
+  });
+}
+function set(o){
+  if(o.amb){var r=$$('input[name=amb]').filter(function(x){return x.value===o.amb})[0];if(r){r.checked=true;espacos(o.amb,o.esp)}}
+  if(o.pes)form.pes.value=o.pes;
+  if(o.hor){var h=$$('input[name=hor]').filter(function(x){return x.value===o.hor})[0];if(h)h.checked=true}
+  if(o.data&&o.data>=d.min){form.data.value=o.data;travar()}
+  if(o.nome)form.nome.value=o.nome;
+  if(o.oca)form.oca.value=o.oca;
+  if(o.obs)form.obs.value=o.obs;
+  render(); fotos();
+}
+form.addEventListener('input',function(e){if(e.target.name==='data'&&cfg)travar();render()});
+form.addEventListener('change',function(e){if(e.target.name==='amb')espacos(e.target.value);if(e.target.name==='data')travar();render();fotos()});
+
+CB.load().then(function(c){
+  cfg=c;
+  cfg.tipos.forEach(function(t){chip($('#c-amb'),'amb',t.id,T(t.id))});
+  render(); lastFoto='x'; fotos();
+  /* vindo da página inicial */
+  var o={}; ['amb','esp','pes','hor','data','oca'].forEach(function(k){if(q.get(k))o[k]=q.get(k)});
+  var u=CB.ultima();
+  if(q.get('repetir')&&u){o={amb:u.amb,esp:u.esp,pes:u.pes,hor:u.hor,nome:u.nome};msg.textContent=T('Dados da última vez preenchidos. Confira o dia e envie.')}
+  else if(u&&u.nome){
+    form.nome.value=u.nome;
+    var w=$('#welcome'); w.hidden=false;
+    w.innerHTML='<span>'+T('Que bom te ver de novo,')+' <b>'+esc(u.nome.split(' ')[0])+'</b>. '+T('Repetir a última reserva')+' ('+esc(L(u.esp||u.amb))+', '+esc(u.pes)+' '+T('pessoas')+', '+esc(u.hor)+')?</span> <button type="button" class="link" id="w-yes">'+T('Usar')+'</button>';
+    $('#w-yes').addEventListener('click',function(){set({amb:u.amb,esp:u.esp,pes:u.pes,hor:u.hor,nome:u.nome});w.hidden=true});
+  }
+  set(o);
+  if(Object.keys(o).length&&!msg.textContent){msg.textContent=T('Já deixamos uma parte preenchida. Complete o que falta e envie.')}
+  CB.chrome(cfg);
+});
+
+function bad(id,on){var el=$('#'+id); if(on)el.setAttribute('aria-invalid','true'); else el.removeAttribute('aria-invalid')}
+form.addEventListener('submit',function(e){
+  e.preventDefault(); var v=val(), p=CB.partes(); msg.dataset.s='';
+  ['fd-data','fd-pes','fd-nome'].forEach(function(i){bad(i,false)});
+  var erro=null,foco=null;
+  if(!v.amb){erro='Escolha o ambiente: área, tenda ou salão.'}
+  else if(!v.data||v.data<p.iso){bad('fd-data',true);erro='Escolha o dia da reserva.';foco=form.data}
+  else if(!v.pes){bad('fd-pes',true);erro='Diga quantas pessoas vão.';foco=form.pes}
+  else if(!v.hor){erro='Escolha o horário de chegada.'}
+  else if(v.data===p.iso&&p.t>=870){bad('fd-data',true);erro='As reservas de hoje já encerraram. Escolha amanhã.';foco=form.data}
+  else if(v.data===p.iso&&MIN[v.hor]<=p.t){erro='Esse horário já passou. Escolha um mais tarde ou outro dia.'}
+  else if(!v.nome){bad('fd-nome',true);erro='Escreva o seu nome.';foco=form.nome}
+  if(!erro&&v.esp&&ocupado(v.esp,v.data))erro='Esse espaço já está ocupado nesse dia. Escolha outro.';
+  if(erro){msg.dataset.s='error';msg.textContent=T(erro);if(foco)foco.focus();return}
+  try{localStorage.setItem('cb_ultima_reserva',JSON.stringify({nome:v.nome,amb:v.amb,esp:v.esp,pes:v.pes,hor:v.hor}))}catch(e){}
+  var url='https://wa.me/'+WA+'?text='+encodeURIComponent(texto(v,true));
+  msg.textContent=T('Abrindo o WhatsApp com a sua reserva.');
+  var w=window.open(url,'_blank','noopener');
+  CB.registrar({nome:v.nome,pessoas:v.pes,data:v.data,horario:v.hor,ambiente:v.amb,espaco:v.esp,ocasiao:v.oca,observacao:v.obs}); /* só depois do WhatsApp, e sem travar se a nuvem estiver fora */
+  if(!w){msg.innerHTML=T('Se o WhatsApp não abriu,')+' <a class="link" href="'+url+'" target="_blank" rel="noopener">'+T('toque aqui para enviar')+'</a>.'}
+});
+})();
+</script>
+</body>
+</html>
