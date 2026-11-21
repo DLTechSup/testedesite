@@ -103,10 +103,10 @@
         <p class="lead">Escolha o momento e a reserva já abre pronta, com o lugar e o número de pessoas sugeridos.</p>
       </div>
       <div class="occ" id="occ">
-        <a class="occ__i rv" href="reservar.html?oca=Encontro+a+dois&amb=Tenda&pes=2" data-img="img/casal-coco.jpg"><span class="occ__n">Dia a dois</span><span class="occ__d">Tenda com sombra, vista pro mar e tempo só pra vocês.</span><span class="occ__go">Reservar para dois</span></a>
-        <a class="occ__i rv" href="reservar.html?oca=Almo%C3%A7o+em+fam%C3%ADlia&amb=Sal%C3%A3o&pes=4&hor=12h" data-img="img/peixada.jpg"><span class="occ__n">Almoço em família</span><span class="occ__d">Salão coberto, mesa grande e a criançada à vontade.</span><span class="occ__go">Reservar para a família</span></a>
-        <a class="occ__i rv" href="reservar.html?oca=Turma+de+amigos&amb=%C3%81rea&pes=6" data-img="img/cervejas.jpg"><span class="occ__n">Resenha com a turma</span><span class="occ__d">Pé na areia, gelada na mesa e todo mundo junto.</span><span class="occ__go">Reservar para a turma</span></a>
-        <a class="occ__i rv" href="reservar.html?oca=Anivers%C3%A1rio&amb=Sal%C3%A3o&pes=mais+de+12" data-img="img/tenda-laranja.jpg"><span class="occ__n">Aniversário na praia</span><span class="occ__d">Comemore de frente pro mar. Conte quantos convidados vêm e a gente organiza.</span><span class="occ__go">Reservar a comemoração</span></a>
+        <a class="occ__i rv" href="reservar.html?oca=Encontro+a+dois&amb=Tenda&pes=2" data-img="img/casal-coco.jpg"><img class="occ__img" src="img/casal-coco.jpg" alt="" loading="lazy" decoding="async"><span class="occ__n">Dia a dois</span><span class="occ__d">Tenda com sombra, vista pro mar e tempo só pra vocês.</span><span class="occ__go">Reservar para dois</span></a>
+        <a class="occ__i rv" href="reservar.html?oca=Almo%C3%A7o+em+fam%C3%ADlia&amb=Sal%C3%A3o&pes=4&hor=12h" data-img="img/peixada.jpg"><img class="occ__img" src="img/peixada.jpg" alt="" loading="lazy" decoding="async"><span class="occ__n">Almoço em família</span><span class="occ__d">Salão coberto, mesa grande e a criançada à vontade.</span><span class="occ__go">Reservar para a família</span></a>
+        <a class="occ__i rv" href="reservar.html?oca=Turma+de+amigos&amb=%C3%81rea&pes=6" data-img="img/cervejas.jpg"><img class="occ__img" src="img/cervejas.jpg" alt="" loading="lazy" decoding="async"><span class="occ__n">Resenha com a turma</span><span class="occ__d">Pé na areia, gelada na mesa e todo mundo junto.</span><span class="occ__go">Reservar para a turma</span></a>
+        <a class="occ__i rv" href="reservar.html?oca=Anivers%C3%A1rio&amb=Sal%C3%A3o&pes=mais+de+12" data-img="img/tenda-laranja.jpg"><img class="occ__img" src="img/tenda-laranja.jpg" alt="" loading="lazy" decoding="async"><span class="occ__n">Aniversário na praia</span><span class="occ__d">Comemore de frente pro mar. Conte quantos convidados vêm e a gente organiza.</span><span class="occ__go">Reservar a comemoração</span></a>
       </div>
     </div>
     <div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
@@ -352,6 +352,16 @@ live(); setInterval(live,30000);
 var u=CB.ultima();
 if(u&&u.nome){var w=document.createElement('div');w.className='welcome';w.innerHTML='<span>'+T('Que bom te ver de novo,')+' <b>'+esc(u.nome.split(' ')[0])+'</b>.</span> <a class="link" href="reservar.html?repetir=1">'+T('Repetir minha última reserva')+'</a>';$('#live').after(w)}
 var rotEl=$('#rot'), frases=['um coco gelado.','uma peixada de frente pro mar.','pé na areia.','música e boa companhia.','uma gelada com a turma.','camarão crocante e brisa.','uma caipirinha bem gelada.'].map(T), ri=0; rotEl.textContent=frases[0];
+/* cada frase tem um tamanho: a linha guarda a altura da maior, para o formulário logo abaixo não subir e descer a cada troca */
+var rotP=rotEl.parentNode, rotW=0;
+function rotAltura(){
+  if(innerWidth===rotW)return; rotW=innerWidth;
+  var t=rotEl.textContent, m=0; rotP.style.minHeight='';
+  frases.forEach(function(f){rotEl.textContent=f;m=Math.max(m,rotP.offsetHeight)});
+  rotEl.textContent=t; rotP.style.minHeight=m+'px';
+}
+rotAltura(); addEventListener('resize',rotAltura);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){rotW=0;rotAltura()});
 if(!reduce&&rotEl.animate){setInterval(function(){
   ri=(ri+1)%frases.length;
   var out=rotEl.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-40%)'}],{duration:240,easing:'ease-in',fill:'forwards'});
@@ -529,5 +539,6 @@ CB.load().then(function(cfg){
 });
 })();
 </script>
+<script src="js/caranguejo.js"></script>
 </body>
 </html>

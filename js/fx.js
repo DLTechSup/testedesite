@@ -134,7 +134,7 @@ function init(cfg){
       dh.textContent=hh+'h'+(half&&hh<17?'30':'');
     }
     /* topo: fotos em velocidades diferentes */
-    if(y<vh*1.4)heroFigs.forEach(function(f){f.style.translate='0 '+(y*parseFloat(f.dataset.speed)).toFixed(1)+'px'});
+    if(y<vh*1.4){var lar=wide();heroFigs.forEach(function(f){f.style.translate=lar?'0 '+(y*parseFloat(f.dataset.speed)).toFixed(1)+'px':''})}
     /* frase */
     if(say){var r=saySec.getBoundingClientRect(), sp=clamp(-r.top/Math.max(1,saySec.offsetHeight-vh),0,1), n=Math.round(clamp(sp/.82,0,1)*sws.length), pi=Math.min(sayPics.length-1,Math.floor(sp*sayPics.length*.999));
       sws.forEach(function(s,i){s.classList.toggle('on',i<n);s.classList.toggle('hot',i===n-1&&n<sws.length)});
