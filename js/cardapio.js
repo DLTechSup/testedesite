@@ -18,6 +18,15 @@ if(!C||!D.querySelector)return;
 function $(s,c){return (c||D).querySelector(s)}
 function $$(s,c){return [].slice.call((c||D).querySelectorAll(s))}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+/* no computador (tela grande com mouse) o cardápio baixa em A4 deitado, com três colunas por página;
+   no celular e no tablet, baixa no formato do celular */
+if(W.matchMedia&&W.matchMedia('(min-width: 900px) and (hover: hover) and (pointer: fine)').matches){
+  CFG.pdf='cardapio-a4.pdf'; CFG.pdfNome='cardapio-cumbuco-beach-a4.pdf';
+  $$('a[href="cardapio.pdf"]:not([data-fmt])').forEach(function(a){a.setAttribute('href',CFG.pdf);if(a.hasAttribute('download'))a.setAttribute('download',CFG.pdfNome)});
+  $$('[data-t="baixar_s"]').forEach(function(e){e.setAttribute('data-t','baixar_s4');e.textContent='PDF em A4 deitado, bom para imprimir'});
+  /* a escolha passa a oferecer o formato do celular */
+  $$('a[data-fmt]').forEach(function(a){a.setAttribute('href','cardapio.pdf');a.setAttribute('download','cardapio-cumbuco-beach.pdf');var s=a.querySelector('[data-t]');s.setAttribute('data-t','fmt_cel');s.textContent='Baixar no formato do celular'});
+}
 function fold(s){s=String(s).toLowerCase();return s.normalize?s.normalize('NFD').replace(/[̀-ͯ]/g,''):s}
 function guarda(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}return null}
 function mq(q){return !!(W.matchMedia&&W.matchMedia(q).matches)}
@@ -31,7 +40,8 @@ pt:{titulo:'Cardápio | Barraca Cumbuco Beach',cardapio:'Cardápio',
   aberto:'Aberto agora, até as 17h',aberto_c:'Aberto agora',abre_hoje:'Fechado agora. Abre hoje às 9h',abre_amanha:'Fechado agora. Abre amanhã às 9h',fechado_c:'Fechado agora',
   buscar:'Buscar no cardápio',buscar_ph:'Buscar: camarão, peixada, gin…',
   ver:'Ver cardápio',ver_s:'Todos os itens e preços',
-  baixar:'Baixar cardápio agora',baixar_s:'PDF no formato do celular',baixar_c:'Baixar',baixar_r:' cardápio agora',
+  baixar:'Baixar cardápio agora',baixar_s:'PDF no formato do celular',baixar_s4:'PDF em A4 deitado, bom para imprimir',
+  fmt_t:'Prefere outro formato?',fmt_a4:'Baixar em A4 deitado',fmt_cel:'Baixar no formato do celular',baixar_c:'Baixar',baixar_r:' cardápio agora',
   compartilhar:'Compartilhar',comp_s:'Envie o link para quem vai com você',
   qr_s:'Abrir no celular',qr_t:'Cardápio no celular',qr_p:'Aponte a câmera para o código e abra o cardápio no seu aparelho.',
   fechar:'Fechar',n1:'1 item',nN:'{n} itens',duas:'Pratos para 2 pessoas',
@@ -49,7 +59,8 @@ en:{titulo:'Menu | Barraca Cumbuco Beach',cardapio:'Menu',
   aberto:'Open now, until 5 pm',aberto_c:'Open now',abre_hoje:'Closed now. Opens today at 9 am',abre_amanha:'Closed now. Opens tomorrow at 9 am',fechado_c:'Closed now',
   buscar:'Search the menu',buscar_ph:'Search: shrimp, fish, gin…',
   ver:'See the menu',ver_s:'Every item and price',
-  baixar:'Download the menu now',baixar_s:'PDF made for phone screens',baixar_c:'Download',baixar_r:' the menu now',
+  baixar:'Download the menu now',baixar_s:'PDF made for phone screens',baixar_s4:'Landscape A4 PDF, good for printing',
+  fmt_t:'Prefer another format?',fmt_a4:'Download as landscape A4',fmt_cel:'Download the phone version',baixar_c:'Download',baixar_r:' the menu now',
   compartilhar:'Share',comp_s:'Send the link to whoever is coming with you',
   qr_s:'Open on your phone',qr_t:'Menu on your phone',qr_p:'Point your camera at the code to open the menu on your phone.',
   fechar:'Close',n1:'1 item',nN:'{n} items',duas:'Dishes for 2 people',
@@ -68,7 +79,8 @@ es:{titulo:'Menú | Barraca Cumbuco Beach',cardapio:'Menú',
   aberto:'Abierto ahora, hasta las 17 h',aberto_c:'Abierto ahora',abre_hoje:'Cerrado ahora. Abre hoy a las 9 h',abre_amanha:'Cerrado ahora. Abre mañana a las 9 h',fechado_c:'Cerrado ahora',
   buscar:'Buscar en el menú',buscar_ph:'Buscar: camarón, pescado, gin…',
   ver:'Ver el menú',ver_s:'Todos los platos y precios',
-  baixar:'Descargar el menú ahora',baixar_s:'PDF en formato de celular',baixar_c:'Descargar',baixar_r:' el menú ahora',
+  baixar:'Descargar el menú ahora',baixar_s:'PDF en formato de celular',baixar_s4:'PDF en A4 horizontal, ideal para imprimir',
+  fmt_t:'¿Prefieres otro formato?',fmt_a4:'Descargar en A4 horizontal',fmt_cel:'Descargar la versión para celular',baixar_c:'Descargar',baixar_r:' el menú ahora',
   compartilhar:'Compartir',comp_s:'Envía el enlace a quien va contigo',
   qr_s:'Abrir en el celular',qr_t:'Menú en el celular',qr_p:'Apunta la cámara al código y abre el menú en tu teléfono.',
   fechar:'Cerrar',n1:'1 opción',nN:'{n} opciones',duas:'Platos para 2 personas',
@@ -519,15 +531,15 @@ function mostraFoto(i){
    No site publicado o próprio link baixa o PDF. Dentro da prévia do Claude o link comum não
    baixa, então ali o arquivo é entregue pelo recurso de download da própria prévia. */
 function baixa(ev){
-  var c=W.claude;
+  var c=W.claude,el=ev.currentTarget,arq=el.getAttribute('href')||CFG.pdf,nome=el.getAttribute('download')||CFG.pdfNome;
   if(!c||typeof c.use!=='function')return;
   ev.preventDefault();
-  function normal(){var x=D.createElement('a');x.href=CFG.pdf;x.download=CFG.pdfNome;D.body.appendChild(x);x.click();D.body.removeChild(x)}
+  function normal(){var x=D.createElement('a');x.href=arq;x.download=nome;D.body.appendChild(x);x.click();D.body.removeChild(x)}
   toast(t('baixando'));
   c.use('downloads').then(function(d){
     if(!d){normal();return}
-    return fetch(CFG.pdf).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){
-      return d.save({filename:CFG.pdfNome,data:b});
+    return fetch(arq).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){
+      return d.save({filename:nome,data:b});
     }).then(function(){toast(t('baixado'))},function(e){if(!e||e.code!=='declined')toast(t('baixa_erro'))});
   },normal);
 }

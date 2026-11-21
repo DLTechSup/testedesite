@@ -145,6 +145,14 @@ mark{background:#FFD873;color:inherit;border-radius:5px;padding:0 .08em}
 .opt--hot svg{color:#fff}
 .opt--hot small{color:#FFE3D8}
 .opt--hot:hover{background:var(--btn-h);box-shadow:0 12px 24px rgba(196,64,31,.32)}
+/* escolha do formato do PDF (celular ou A4 deitado) */
+.fmt{display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;width:100%;margin-top:10px;font-size:var(--s-xs);color:var(--mut)}
+.fmt__a{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--teal-t);font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+.fmt__a svg{width:16px;height:16px;flex:none}
+.fmt__a:hover{color:var(--deep)}
+.fmt--fim{justify-content:center;margin:12px 0 0;color:var(--cream)}
+.fmt--fim .fmt__a{color:var(--cream);text-decoration-color:var(--orange)}
+.fmt--fim .fmt__a:hover{color:#fff}
 .opt__qr{display:none;width:52px;height:52px;padding:4px;border-radius:8px;background:#fff}
 .opt__qr svg{width:100%;height:100%;color:#123F4A}
 
@@ -519,7 +527,7 @@ dialog::backdrop{background:rgba(9,32,38,.86)}
 .calm .faixa ul[aria-hidden]{display:none}
 .calm .faixa ul{flex-wrap:wrap;justify-content:center;white-space:normal;row-gap:10px}
 @media print{
-  .bar,.cats,.ld,.capa .folha,.praia,.opts,.busca,.brinde,.por,.topo,.pics,.fim__act,.toast{display:none!important}
+  .bar,.cats,.ld,.capa .folha,.praia,.opts,.fmt,.busca,.brinde,.por,.topo,.pics,.fim__act,.toast{display:none!important}
   body{background:#fff}
   .capa{min-height:0;padding-top:0}
   .js .it,.js .rv,.js [data-in],.js .ch,.js .sec__ic,.js .sec__o,.js .sec__meta,.js .it .it__p{opacity:1!important;transform:none!important;translate:0 0!important}

@@ -94,10 +94,19 @@ Em todo o site o sol é o da logo, com os raios na volta inteira (página inicia
 
 O caranguejo segura a placa do cardápio e anda pelos cantos de baixo da tela, na página inicial e na de reservas. Tocar nele abre o cardápio. Tudo dele está em `js/caranguejo.js`; as frases em inglês e espanhol ficam em `js/i18n.js`.
 
-- Aparece de mansinho espiando num canto ("Psiu!"), entra, finge que vai embora ("Brincadeira! Tô aqui!"), mostra a placa ("Olha o cardápio!"), recua e fica espiando na beirada, some e depois aparece do outro lado.
+- Aparece de mansinho espiando num canto ("Psiu!"), entra, finge que vai embora ("Brincadeira! Tô aqui!"), mostra a placa ("Olha o cardápio!") e fica no canto, inteiro dentro da tela, oferecendo o cardápio de tempos em tempos ("Bateu fome? Me toca!"). No meio do tempo ele se esconde um pouco na beirada, espiando ("Achou!"). Depois de uns 40 segundos some e aparece do outro lado.
+- Se ele estiver escondido ou espiando e a pessoa passar o mouse ou tocar nele, ele anda para frente e aparece de corpo inteiro ("Oi! Quer ver o cardápio?"); com ele inteiro na tela, o toque abre o cardápio.
 - Reage à parte do site que a pessoa está olhando: aponta para as ocasiões, os ambientes, a foto do "Monte o seu dia" e o mapa; nos pratos, joga uma cordinha e puxa o prato mais perto; em "E tem muito mais no cardápio", puxa o quadro e fala quantas opções existem.
 - Incentiva quem está fazendo a reserva: comenta o dia, o número de pessoas, o lugar, o horário e o nome escolhidos, avisa quando está tudo pronto, ajuda quando falta algum dado e comemora quando a reserva vai para o WhatsApp.
-- Não atrapalha: fica só nos cantos de baixo; quando a pessoa mexe em algo perto dele, vai para o outro lado ou se esconde na beirada, e o balão sobe para não cobrir o que foi tocado. No celular, sai da tela enquanto o teclado está aberto e fica em cima do botão "Guardar minha mesa".
+- Não atrapalha: fica só nos cantos de baixo; quando a pessoa mexe em algo perto dele, vai para o outro lado ou se esconde na beirada só até aquilo sair de perto, e o balão sobe para não cobrir o que foi tocado. No celular, sai da tela enquanto o teclado está aberto e fica em cima do botão "Guardar minha mesa".
 - Quem usa "reduzir movimento" no aparelho vê o caranguejo parado no canto, sem andar.
 - Para tirar o caranguejo, apague a linha `<script src="js/caranguejo.js"></script>` do fim de `index.html` e de `reservar.html`.
+
+## Cardápio em PDF: celular e computador
+
+- `cardapio.pdf`: formato do celular (uma coluna, páginas do tamanho da tela).
+- `cardapio-a4.pdf`: A4 deitado, com três colunas por página, capa com fotos dos pratos e a mesma arte do PDF do celular.
+- O botão "Baixar cardápio" escolhe sozinho: em computador (tela grande com mouse) baixa o A4; no celular e no tablet, baixa o do celular.
+- Logo abaixo das opções do topo e no rodapé fica a linha "Prefere outro formato?", que baixa o outro PDF (no computador oferece o do celular; no celular e no tablet, o A4 deitado). Assim a pessoa pode escolher.
+- Os dois são gerados a partir de `js/dados.js`; se o cardápio mudar, os dois PDFs precisam ser gerados de novo.
 
