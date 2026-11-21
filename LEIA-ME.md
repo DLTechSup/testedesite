@@ -92,13 +92,18 @@ Em todo o site o sol é o da logo, com os raios na volta inteira (página inicia
 
 ## Caranguejo do cardápio (versão 9)
 
-O caranguejo segura a placa do cardápio e anda pelos cantos de baixo da tela, na página inicial e na de reservas. Tocar nele abre o cardápio. Tudo dele está em `js/caranguejo.js`; as frases em inglês e espanhol ficam em `js/i18n.js`.
+O caranguejo segura a placa do cardápio e anda pelos cantos de baixo da tela, na página inicial e na de reservas. Às vezes ele sai de trás de um botão ou de um título grande. Tocar nele abre o cardápio. Tudo dele está em `js/caranguejo.js`; as frases em inglês e espanhol ficam em `js/i18n.js`.
 
-- Aparece de mansinho espiando num canto ("Psiu!"), entra, finge que vai embora ("Brincadeira! Tô aqui!"), mostra a placa ("Olha o cardápio!") e fica no canto, inteiro dentro da tela, oferecendo o cardápio de tempos em tempos ("Bateu fome? Me toca!"). No meio do tempo ele se esconde um pouco na beirada, espiando ("Achou!"). Depois de uns 40 segundos some e aparece do outro lado.
+- Aparece de mansinho espiando num canto ("Psiu!"), entra, finge que vai embora ("Brincadeira! Tô aqui!") e mostra a placa ("Olha o cardápio!").
+- No computador, fica no canto, inteiro dentro da tela, oferecendo o cardápio de tempos em tempos ("Bateu fome? Me toca!"). No meio do tempo ele sai do canto e aparece por trás de um botão ou de um título (ou só espia na beirada, "Achou!"). Depois de uns 40 segundos some e aparece do outro lado.
+- No celular e no tablet, ele faz visitas: aparece, interage com o que está na tela e vai embora; uns 7 a 12 segundos depois volta, cada vez de um jeito e do outro lado (num canto, por trás de um botão, andando por cima de um título ou só espiando). Num teste de 2 minutos lendo a página, ficou cerca de 36 segundos inteiro na tela, 11 espiando e o resto fora.
+- Pouso no botão: ele sobe por trás do botão (por exemplo, "Ver cardápio online", "Reservar nesse horário" ou o "Guardar minha mesa" do celular), mostra a placa e fala. Se a pessoa rolar a página ou não tocar nele em alguns segundos, ele volta para trás do botão.
+- Pouso no título: ele sai de trás das letras de um título grande ("Qual é a ocasião?", "Áreas: pé na areia", "Dia a dois"…), anda de lado por cima delas ("Licença, tô passando!"), oferece o cardápio e volta para trás das letras. Rolar a página também faz ele voltar na hora.
+- O "x" redondo acima dele fecha o caranguejo ("Tá bom, tchau!"). Fechado, ele não aparece mais em nenhuma página durante aquela visita; numa nova visita, volta.
 - Se ele estiver escondido ou espiando e a pessoa passar o mouse ou tocar nele, ele anda para frente e aparece de corpo inteiro ("Oi! Quer ver o cardápio?"); com ele inteiro na tela, o toque abre o cardápio.
 - Reage à parte do site que a pessoa está olhando: aponta para as ocasiões, os ambientes, a foto do "Monte o seu dia" e o mapa; nos pratos, joga uma cordinha e puxa o prato mais perto; em "E tem muito mais no cardápio", puxa o quadro e fala quantas opções existem.
 - Incentiva quem está fazendo a reserva: comenta o dia, o número de pessoas, o lugar, o horário e o nome escolhidos, avisa quando está tudo pronto, ajuda quando falta algum dado e comemora quando a reserva vai para o WhatsApp.
-- Não atrapalha: fica só nos cantos de baixo; quando a pessoa mexe em algo perto dele, vai para o outro lado ou se esconde na beirada só até aquilo sair de perto, e o balão sobe para não cobrir o que foi tocado. No celular, sai da tela enquanto o teclado está aberto e fica em cima do botão "Guardar minha mesa".
+- Não atrapalha: os pousos são rápidos e não acontecem enquanto a pessoa preenche um formulário; no resto do tempo fica nos cantos de baixo; quando a pessoa mexe em algo perto dele, vai para o outro lado ou se esconde na beirada só até aquilo sair de perto, e o balão sobe para não cobrir o que foi tocado. No celular, sai da tela enquanto o teclado está aberto e fica em cima do botão "Guardar minha mesa".
 - Quem usa "reduzir movimento" no aparelho vê o caranguejo parado no canto, sem andar.
 - Para tirar o caranguejo, apague a linha `<script src="js/caranguejo.js"></script>` do fim de `index.html` e de `reservar.html`.
 
