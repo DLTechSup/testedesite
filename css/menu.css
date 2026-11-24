@@ -31,7 +31,6 @@
 .nav__links a.nav__menu{color:var(--cream)}
 .nav__links a{white-space:nowrap}
 @media (max-width:84rem){.nav .status{display:none}}
-@media (max-width:62rem){.nav__links a.nav__menu{display:none}}
 @media (max-width:72rem){
   .partes{display:flex;flex-wrap:wrap;justify-content:center}
   .parte{flex:0 0 calc((100% - 50px)/6 - .1px)}

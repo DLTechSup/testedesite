@@ -198,7 +198,20 @@ function chrome(cfg){
   walk(document.body);
   $$('[data-nome]').forEach(function(el){el.textContent=cfg.nome});
   var lg=$('#lang');
-  if(lg){lg.innerHTML='';LANGS.forEach(function(l){var b=document.createElement('button');b.type='button';b.textContent=l.toUpperCase();b.setAttribute('aria-pressed',l===LG);b.setAttribute('aria-label',{pt:'Português',en:'English',es:'Español'}[l]);b.addEventListener('click',function(){if(l!==LG)setLang(l)});lg.appendChild(b)})}
+  if(lg){lg.innerHTML='';
+    /* no menu do topo, em celular e tablet, o idioma vira um botão só (o idioma atual) que abre as três opções; assim cabem Cardápio e Reservar */
+    var ops=lg;
+    if(lg.closest('#nav')){
+      var at=document.createElement('button');at.type='button';at.className='lang__atual';at.setAttribute('aria-expanded','false');
+      at.setAttribute('aria-label',{pt:'Idioma: Português',en:'Language: English',es:'Idioma: Español'}[LG]);
+      at.innerHTML=LG.toUpperCase()+'<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      var fecha=function(){lg.classList.remove('aberto');at.setAttribute('aria-expanded','false')};
+      at.addEventListener('click',function(e){e.stopPropagation();at.setAttribute('aria-expanded',lg.classList.toggle('aberto'))});
+      document.addEventListener('click',function(e){if(!lg.contains(e.target))fecha()});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lg.classList.contains('aberto')){fecha();at.focus()}});
+      ops=document.createElement('span');ops.className='lang__ops';lg.appendChild(at);lg.appendChild(ops);
+    }
+    LANGS.forEach(function(l){var b=document.createElement('button');b.type='button';b.textContent=l.toUpperCase();b.setAttribute('aria-pressed',l===LG);b.setAttribute('aria-label',{pt:'Português',en:'English',es:'Español'}[l]);b.addEventListener('click',function(){if(l!==LG)setLang(l)});ops.appendChild(b)})}
   document.title=document.title.replace('Cumbuco Beach',cfg.nome);
   var st=$('#status');
   function status(){
@@ -207,8 +220,7 @@ function chrome(cfg){
     else{st.classList.remove('open');lab.textContent=T(t<540?'Abrimos hoje às 9h':'Fechado agora, abrimos às 9h')}
   }
   status(); setInterval(status,30000);
-  var nav=$('#nav'),lastY=0;
-  if(nav)addEventListener('scroll',function(){var y=scrollY;nav.classList.toggle('hide',y>lastY&&y>360&&innerWidth>992);lastY=y},{passive:true});
+  /* o menu do topo (com os botões Cardápio e Reservar) fica sempre visível, em qualquer tela, mesmo rolando a página */
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a)return;
     var id=a.getAttribute('href').slice(1), el=id?document.getElementById(id):null; if(!el)return;

@@ -507,3 +507,26 @@ details.sub[open] summary{margin-bottom:10px}
 .adm input[type=date]{background:#fff;border:2px solid #8FB3B7;border-radius:12px;min-height:52px;padding:0 16px;width:100%;color:var(--deep);font-weight:500}
 @media (max-width:62rem){.nav__in{gap:10px}.lang button{min-width:36px}}
 @media (prefers-reduced-motion:reduce){.aviso::before{animation:none}}
+
+/* menu do topo sempre com Cardápio e Reservar à vista; no celular e no tablet o idioma vira um botão só, que abre as três opções */
+.lang__atual{display:none}
+.lang__ops{display:contents}
+@media (max-width:62rem){
+  .nav .nav__links{gap:8px}
+  .nav .lang{position:relative;padding:0;background:none}
+  .nav .lang__atual{display:inline-flex;align-items:center;gap:4px;min-height:42px;padding:0 10px 0 12px;border:0;border-radius:999px;background:var(--sand);color:var(--deep);font-family:var(--font-d);font-weight:500;font-size:var(--s-sm);cursor:pointer}
+  .nav .lang__atual svg{width:12px;height:12px;transition:transform .25s var(--ease)}
+  .nav .lang.aberto .lang__atual svg{transform:rotate(180deg)}
+  .nav .lang__ops{display:none;position:absolute;top:calc(100% + 8px);right:0;z-index:2;flex-direction:column;gap:2px;padding:4px;border-radius:18px;background:var(--cream);box-shadow:0 12px 28px rgba(23,67,75,.22)}
+  .nav .lang.aberto .lang__ops{display:flex}
+  .nav .lang__ops button{min-width:64px}
+}
+@media (max-width:400px){
+  .nav .nav__links{gap:6px}
+  .nav .nav__links .btn--sm{min-height:42px;padding:0 13px}
+  .nav .lang__atual{padding:0 8px 0 10px}
+}
+@media (max-width:350px){
+  .nav .nav__links .btn--sm{padding:0 10px;font-size:.86rem}
+  .nav .badge{width:50px;height:50px}
+}

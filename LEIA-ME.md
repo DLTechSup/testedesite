@@ -90,21 +90,27 @@ Quem usa o aparelho com "reduzir movimento" ligado vê o site sem os efeitos.
 ## Sol
 Em todo o site o sol é o da logo, com os raios na volta inteira (página inicial e cardápio).
 
+## Menu do topo sempre visível
+
+- O menu do topo fica fixo em todas as telas, mesmo rolando a página: no computador ele não some mais ao descer.
+- Os botões "Cardápio" e "Reservar" (na página de reservas, "Cardápio" e "WhatsApp") aparecem sempre, também no celular e no tablet.
+- No celular e no tablet, para tudo caber, o idioma virou um botão só com o idioma atual (PT); ao tocar, abre PT, EN e ES. No computador continua como antes, com os três lado a lado.
+- O botão "Guardar minha mesa" do pé da tela continua como antes.
+
 ## Caranguejo do cardápio (versão 9)
 
-O caranguejo segura a placa do cardápio e anda pelos cantos de baixo da tela, na página inicial e na de reservas. Às vezes ele sai de trás de um botão ou de um título grande. Tocar nele abre o cardápio. Tudo dele está em `js/caranguejo.js`; as frases em inglês e espanhol ficam em `js/i18n.js`.
+O caranguejo segura a placa do cardápio, na página inicial e na de reservas. Tocar nele abre o cardápio. Tudo dele está em `js/caranguejo.js`; as frases em inglês e espanhol ficam em `js/i18n.js`.
 
-- Aparece de mansinho espiando num canto ("Psiu!"), entra, finge que vai embora ("Brincadeira! Tô aqui!") e mostra a placa ("Olha o cardápio!").
-- No computador, fica no canto, inteiro dentro da tela, oferecendo o cardápio de tempos em tempos ("Bateu fome? Me toca!"). No meio do tempo ele sai do canto e aparece por trás de um botão ou de um título (ou só espia na beirada, "Achou!"). Depois de uns 40 segundos some e aparece do outro lado.
-- No celular e no tablet, ele faz visitas: aparece, interage com o que está na tela e vai embora; uns 7 a 12 segundos depois volta, cada vez de um jeito e do outro lado (num canto, por trás de um botão, andando por cima de um título ou só espiando). Num teste de 2 minutos lendo a página, ficou cerca de 36 segundos inteiro na tela, 11 espiando e o resto fora.
-- Pouso no botão: ele sobe por trás do botão (por exemplo, "Ver cardápio online", "Reservar nesse horário" ou o "Guardar minha mesa" do celular), mostra a placa e fala. Se a pessoa rolar a página ou não tocar nele em alguns segundos, ele volta para trás do botão.
-- Pouso no título: ele sai de trás das letras de um título grande ("Qual é a ocasião?", "Áreas: pé na areia", "Dia a dois"…), anda de lado por cima delas ("Licença, tô passando!"), oferece o cardápio e volta para trás das letras. Rolar a página também faz ele voltar na hora.
+- **Só aparece onde não cobre nada.** Antes de aparecer, ele confere a tela e só entra num lugar sem texto, sem foto e sem botão embaixo dele: um canto de baixo que esteja livre, ou o espaço vazio em cima de um título, de um botão ou de uma foto (de onde ele "sai de trás"). Se não houver lugar livre naquele momento, ele espera e aparece mais adiante.
+- Se a pessoa rolar a página e algum texto ou foto chegar embaixo dele no canto, ele desce rápido para fora da tela e volta depois em outro lugar livre. Nos pousos em cima de títulos, botões e fotos, rolar a página faz ele voltar para trás deles na hora.
+- O balão de fala vai para o lado (ou para cima) onde não cobre nada; se em todo lugar fosse cobrir, ele não fala, só faz o gesto. A placa só sobe se o espaço em cima dele estiver vazio, e o "x" de fechar só aparece onde não cobre nada.
+- **No computador**, nos cantos livres, aparece de mansinho espiando ("Psiu!"), entra, finge que vai embora ("Brincadeira! Tô aqui!"), mostra a placa e fica oferecendo o cardápio ("Bateu fome? Me toca!"). No meio do tempo sai do canto para um pouso ou espia na beirada ("Achou!"). Depois de uns 40 segundos some e aparece do outro lado.
+- **No celular e no tablet**, os cantos quase sempre têm texto ou foto embaixo, então ele faz visitas curtas nos espaços livres: sai de trás de um título e anda por cima das letras ("Licença, tô passando!"), sai de trás de uma foto ou de um botão, ou espia na beirada; depois vai embora e volta uns 7 a 12 segundos depois.
+- **Fim da página ("Vem pra cá!")**: quando o "Vem pra cá!" aparece inteiro na tela, ele sai de trás do "V" e surfa por cima das letras, subindo e descendo com a onda do nome e inclinando o corpo nas subidas e descidas. Embaixo do logo ele mergulha atrás das letras (fica só a placa aparecendo) para não cobrir o logo, e sobe de novo no "cá!" ("Pegando onda!", "Te espero na praia!"). Acontece uma vez a cada chegada ao fim da página.
+- Se ele estiver espiando e a pessoa passar o mouse ou tocar nele, ele anda para frente ("Oi! Quer ver o cardápio?"), se ali estiver livre; com ele à vista, o toque abre o cardápio.
+- Reage à parte do site que a pessoa está olhando (ocasiões, ambientes, "Monte o seu dia", pratos, "E tem muito mais no cardápio", fotos, mapa) e incentiva quem está fazendo a reserva, sempre aparecendo no lugar livre mais perto do que ele está mostrando. Se não houver lugar livre, ele não aparece para aquela reação.
 - O "x" redondo acima dele fecha o caranguejo ("Tá bom, tchau!"). Fechado, ele não aparece mais em nenhuma página durante aquela visita; numa nova visita, volta.
-- Se ele estiver escondido ou espiando e a pessoa passar o mouse ou tocar nele, ele anda para frente e aparece de corpo inteiro ("Oi! Quer ver o cardápio?"); com ele inteiro na tela, o toque abre o cardápio.
-- Reage à parte do site que a pessoa está olhando: aponta para as ocasiões, os ambientes, a foto do "Monte o seu dia" e o mapa; nos pratos, joga uma cordinha e puxa o prato mais perto; em "E tem muito mais no cardápio", puxa o quadro e fala quantas opções existem.
-- Incentiva quem está fazendo a reserva: comenta o dia, o número de pessoas, o lugar, o horário e o nome escolhidos, avisa quando está tudo pronto, ajuda quando falta algum dado e comemora quando a reserva vai para o WhatsApp.
-- Não atrapalha: os pousos são rápidos e não acontecem enquanto a pessoa preenche um formulário; no resto do tempo fica nos cantos de baixo; quando a pessoa mexe em algo perto dele, vai para o outro lado ou se esconde na beirada só até aquilo sair de perto, e o balão sobe para não cobrir o que foi tocado. No celular, sai da tela enquanto o teclado está aberto e fica em cima do botão "Guardar minha mesa".
-- Quem usa "reduzir movimento" no aparelho vê o caranguejo parado no canto, sem andar.
+- Quem usa "reduzir movimento" no aparelho vê o caranguejo parado num canto livre; se nenhum canto estiver livre, ele fica escondido até ficar.
 - Para tirar o caranguejo, apague a linha `<script src="js/caranguejo.js"></script>` do fim de `index.html` e de `reservar.html`.
 
 ## Cardápio em PDF: celular e computador
